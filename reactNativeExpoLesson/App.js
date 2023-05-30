@@ -7,6 +7,9 @@ import {
   Button,
   Alert,
   Platform,
+  Image,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 export default function App() {
@@ -59,9 +62,19 @@ export default function App() {
       Alert.prompt(
         "Title Prompt",
         "Msg: Alert Component Prompt Btn Clicked On Other Device",
-        (text) => console.log(text)
+        (text) => {
+          if (text) {
+            console.log(text);
+          } else {
+            console.log("Empty");
+          }
+        }
       );
     }
+  };
+
+  const handleImagePress = () => {
+    console.log("Image Pressed");
   };
 
   return (
@@ -91,7 +104,7 @@ export default function App() {
 
       {/* style icine ancaq ya object sekinde parametrler otururuk,
     ya da objectlerden ibaret arrey seklinde */}
-      <Text style={styles.examplStyle}>Style Yoxlama</Text>
+      <Text style={styles.examplStyle}>Color Red Style Yoxlama</Text>
 
       {/* her hansi bir component-in uzerine basdiqda
      bir is gormesi ucun: */}
@@ -133,9 +146,53 @@ export default function App() {
         title="Alert Component prompt Btn"
         onPress={handlePressAlertComponentPromptBtn}
       />
-      <Text>{"\n"}</Text>
 
-      <StatusBar style="auto" />
+      <Text>{"\n Local Image \n\n"}</Text>
+      {/* Image Component -> width, height-i olmasa web de gorunmur. 
+      iphone de misal sekil oz olcusu qeder yer tutur. */}
+      <Image
+        source={require("./assets/adaptive-icon.png")}
+        style={{ width: "50%", height: 200 }}
+      />
+      {/* source -> seklin local-daki adresini verirsen
+      bunu da: require funksiyasi ile, path-ini oturerek */}
+
+      <Text>{"\n Web Image with url \n\n"}</Text>
+      {/* Image Component -> url source ile */}
+      <Image
+        blurRadius={3}
+        source={{
+          width: "50%",
+          height: 200,
+          uri: "https://scontent.fgyd8-1.fna.fbcdn.net/v/t1.6435-9/86192232_558235655035591_5186826467719249920_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=9267fe&_nc_ohc=-XVtn1nQadwAX_X2dpc&_nc_oc=AQkfvVU_WKXLZ7g0TfT6Xn2Mvect0jJa8LqClyLjw30BcMNv0zGLNSnu368entbKzmw&_nc_ht=scontent.fgyd8-1.fna&oh=00_AfAk8kWvtA10kn-5qbRusq8GFy18xDO5aUI6r-XxaqNb1A&oe=649D3AAC",
+        }}
+        style={{
+          alignSelf: "end",
+        }}
+      />
+      {/* blurRadius -> sekile blurluq verir */}
+
+      <Text>{"\n TouchableHighlight Component \n\n"}</Text>
+      {/* TouchableHighlight Component -> sekile touch olunaa bilmesi ucun lazimdir. */}
+      <TouchableHighlight onPress={handleImagePress}>
+        <Image
+          source={require("./assets/img/image_1.jpg")}
+          style={{ width: "50%", height: 200 }}
+        />
+      </TouchableHighlight>
+
+      <Text>{"\n TouchableWithoutFeedback Component \n\n"}</Text>
+      {/* Default olaraq biz sekile press etdikde, TouchableHighlight componentin arxada sekile elave bir effekt verdiyini goruruk.
+          Bezi hallarda bu hadise isteyimiz uzre yerine duse biler,
+          amma indiki hall da istediyimiz kimi deyil, yeni bize lazim deyil. Buna gore:  TouchableWithoutFeedback istifade edirik*/}
+      <TouchableWithoutFeedback onPress={handleImagePress}>
+        <Image
+          source={require("./assets/img/image_2.jpg")}
+          style={{ width: "50%", height: 200, alignSelf: "end" }}
+        />
+      </TouchableWithoutFeedback>
+
+      {/* <StatusBar style="auto" /> */}
     </SafeAreaView>
   );
 }
