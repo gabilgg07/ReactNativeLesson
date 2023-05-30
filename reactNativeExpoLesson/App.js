@@ -1,10 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Button } from "react-native";
 
 export default function App() {
   const handleTextPress = () => {
     console.log("====================================");
     console.log("On Press worked HandleTextPress");
+    console.log("====================================");
+  };
+  const handlePressOrangeBtn = () => {
+    console.log("====================================");
+    console.log("On Press Orange Button worked HandlePressOrangeBtn");
     console.log("====================================");
   };
 
@@ -43,6 +48,23 @@ export default function App() {
       <Text onPress={() => console.log("Text Pressed")}>On Press Event</Text>
       {/* normal gorunus, yeni seliqe ucun ayrica function yaziriq: */}
       <Text onPress={handleTextPress}>Call handleTextPress</Text>
+
+      {/* Button - icine hec bir component qoymuruq deye,
+       safe closing tag yazmaq olar. 
+       Her device de ferqli gorunur. */}
+      <Button title="Press Me" />
+      {/* title - icindeki yazi */}
+
+      {/* color - button-un rengini secmek olur: */}
+      <Button title="Press Me Red" color="red" />
+      <Button title="Press Me #84c736" color="#84c736" />
+
+      {/* Button-da onPress Event */}
+      <Button
+        title="Press Me Orange"
+        color="orange"
+        onPress={handlePressOrangeBtn}
+      />
 
       <StatusBar style="auto" />
     </SafeAreaView>
