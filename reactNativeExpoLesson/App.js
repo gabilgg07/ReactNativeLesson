@@ -1,50 +1,42 @@
-import React, { useState } from "react";
-import { SafeAreaView, ScrollView, View, FlatList } from "react-native";
-import styles from "./styles";
-import Header from "./components/Header/Header";
-import ListItem from "./components/ListItem/ListItem";
-import Form from "./components/Form/Form";
+import React, { useState, useEffect } from "react";
+import { ScrollView } from "react-native";
+import { gStyle } from "./styles/styles";
+import * as Font from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import Main from "./components/Main";
+
+const fonts = () =>
+  Font.loadAsync({
+    "mt-bold": require("./assets/fonts/Montserrat-Bold.ttf"),
+    "mt-regular": require("./assets/fonts/Montserrat-Regular.ttf"),
+    "mt-light": require("./assets/fonts/Montserrat-Light.ttf"),
+  });
 
 export default function App() {
-  let count = 5;
-  const [listOfItems, setListOfItems] = useState([
-    { key: "1", text: "Süd almaq" },
-    { key: "2", text: "Kartof almaq" },
-    { key: "3", text: "Kod yazmaq" },
-    { key: "4", text: "Php öyrənmək" },
-  ]);
+  const [isLoadingComplete, setLoadingComplete] = useState(false);
 
-  const addHandler = (text) => {
-    if (text) {
-      setListOfItems((list) => {
-        return [
-          { key: Math.random().toString(36).substring(7), text: text },
-          ...list,
-        ];
-      });
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await fonts();
+        setLoadingComplete(true);
+        await SplashScreen.hideAsync();
+      } catch (error) {
+        console.warn(error);
+      }
     }
-  };
 
-  const deleteHandler = (key) => {
-    setListOfItems((list) => {
-      return list.filter((listOfItem) => listOfItem.key != key);
-    });
-  };
+    prepare();
+  }, []);
+
+  if (!isLoadingComplete) {
+    return null; // or render a loading component if desired
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
-        <Header />
-        <Form addHandler={addHandler} />
-        <View>
-          <FlatList
-            data={listOfItems}
-            renderItem={({ item }) => (
-              <ListItem el={item} deleteHandler={deleteHandler} />
-            )}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={gStyle.main}>
+      <Main />
+    </ScrollView>
   );
 }
