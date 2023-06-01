@@ -1,12 +1,12 @@
 import React from "react";
-import { Text, TouchableHighlight } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 
 import stylesListItem from "./stylesListItem";
 
-export default function ListItem({ el }) {
+export default function ListItem({ el, deleteHandler }) {
   return (
-    <TouchableHighlight>
-      <Text style={stylesListItem.text}>{`${el.index}. ${el.text}`}</Text>
-    </TouchableHighlight>
+    <TouchableOpacity onPress={() => deleteHandler(el.key)}>
+      <Text style={stylesListItem.text}>{`${el.text}`}</Text>
+    </TouchableOpacity>
   );
 }
