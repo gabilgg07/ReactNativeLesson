@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView } from "react-native";
-import { gStyle } from "./styles/styles";
+// import { ScrollView } from "react-native";
+// import { gStyle } from "./styles/styles";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import Main from "./components/Main";
+import MainStack from "./navigate";
 
 const fonts = () =>
   Font.loadAsync({
@@ -35,8 +35,9 @@ export default function App() {
   }
 
   return (
-    <ScrollView style={gStyle.main}>
-      <Main />
-    </ScrollView>
+    // <ScrollView style={gStyle.main}>
+    //   <MainStack />
+    // </ScrollView>
+    <MainStack />
   );
 }
