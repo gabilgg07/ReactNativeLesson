@@ -10,6 +10,7 @@ import {
 import { gStyle } from "../styles/styles";
 import mainStyles from "../styles/mainStyles";
 import { Ionicons } from "@expo/vector-icons";
+import Form from "./Form";
 
 export default function Main({ navigation }) {
   //   const loadScene = () => {
@@ -41,6 +42,14 @@ export default function Main({ navigation }) {
 
   const [isShowModal, setIsShowModal] = useState(false);
 
+  const addArticle = (article) => {
+    setNews((list) => {
+      article.key = Math.random().toString();
+      return [article, ...list];
+    });
+    setIsShowModal(false);
+  };
+
   return (
     <View style={gStyle.main}>
       <Modal visible={isShowModal}>
@@ -52,7 +61,8 @@ export default function Main({ navigation }) {
             style={{ marginBottom: 10, textAlign: "right" }}
             onPress={() => setIsShowModal(false)}
           />
-          <Text style={gStyle.title}>Stat əlavə etmə forması</Text>
+          <Text style={gStyle.title}>Stat əlavə etmə formu</Text>
+          <Form addArticle={addArticle} />
         </View>
       </Modal>
       <View
