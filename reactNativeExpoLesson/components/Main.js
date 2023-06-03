@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, FlatList, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Image,
+  Modal,
+} from "react-native";
 import { gStyle } from "../styles/styles";
 import mainStyles from "../styles/mainStyles";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Main({ navigation }) {
   //   const loadScene = () => {
@@ -31,9 +39,37 @@ export default function Main({ navigation }) {
     },
   ]);
 
+  const [isShowModal, setIsShowModal] = useState(false);
+
   return (
     <View style={gStyle.main}>
-      <Text style={gStyle.title}>Ana Səhifə</Text>
+      <Modal visible={isShowModal}>
+        <View style={gStyle.main}>
+          <Ionicons
+            name="close-circle"
+            size={34}
+            color="red"
+            style={{ marginBottom: 10, textAlign: "right" }}
+            onPress={() => setIsShowModal(false)}
+          />
+          <Text style={gStyle.title}>Stat əlavə etmə forması</Text>
+        </View>
+      </Modal>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Text style={gStyle.title}>Ana Səhifə</Text>
+        <Ionicons
+          name="add-circle"
+          size={34}
+          color="green"
+          onPress={() => setIsShowModal(true)}
+        />
+      </View>
       {/* <Button title="Səhifəni Açmaq" onPress={loadScene} /> */}
       <FlatList
         data={news}
@@ -54,13 +90,7 @@ export default function Main({ navigation }) {
                   <Text style={mainStyles.anons}>{item.anons}</Text>
                 </Text>
               </View>
-              <Image
-                source={{
-                  width: "100%",
-                  height: 200,
-                  uri: item.img,
-                }}
-              />
+              <Image style={gStyle.image} source={{ uri: item.img }} />
             </View>
           </TouchableOpacity>
         )}

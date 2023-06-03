@@ -14,4 +14,8 @@ export const gStyle = StyleSheet.create({
     textAlign: "center",
     marginBottom: 15,
   },
+  image: {
+    width: "100%",
+    height: 200,
+  },
 });

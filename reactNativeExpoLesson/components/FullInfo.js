@@ -9,14 +9,13 @@ export default function FullInfo({ route }) {
       <Text style={gStyle.title}>{route.params.name}</Text>
       <Text style={infoStyle.full}>{route.params.full}</Text>
       <Image
-        source={{
-          width: "100%",
-          height: 200,
-          uri: route.params.img,
-        }}
-        style={{
-          borderRadius: 10,
-        }}
+        source={{ uri: route.params.img }}
+        style={[
+          gStyle.image,
+          {
+            borderRadius: 10,
+          },
+        ]}
       />
     </View>
   );
