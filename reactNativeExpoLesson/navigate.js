@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "react-native-gesture-handler";
 
 import Main from "./components/Main";
@@ -17,17 +17,50 @@ export default function Navigate() {
         <Stack.Screen
           name="Main"
           component={Main}
-          options={{ title: "Əsas" }}
+          options={{
+            title: "Əsas",
+            headerStyle: {
+              backgroundColor: "#106b25c2",
+              height: 80,
+            },
+            headerTitleStyle: {
+              fontFamily: "mt-regular",
+            },
+          }}
         />
         <Stack.Screen
           name="Contact"
           component={Contact}
-          options={{ title: "Əlaqələr" }}
+          options={{
+            title: "Əlaqələr",
+            headerStyle: {
+              backgroundColor: "#106b25c2",
+              height: 80,
+            },
+            headerTitleStyle: {
+              fontFamily: "mt-regular",
+            },
+            headerTintColor: "white",
+          }}
         />
         <Stack.Screen
           name="FullInfo"
           component={FullInfo}
-          options={{ title: "Tam Məlumat" }}
+          options={{
+            title: "Tam Məlumat",
+            headerStyle: {
+              backgroundColor: "#106b25c2",
+              height: 80,
+            },
+            headerTitleStyle: {
+              fontFamily: "mt-bold",
+              color: "#000",
+            },
+            headerTintColor: "white",
+            headerBackTitleStyle: {
+              color: "white",
+            },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
